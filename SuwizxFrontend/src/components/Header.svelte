@@ -44,7 +44,7 @@
 
               <!-- mobie -->
               <div class="flex flex-wrap justify-end w-fit md:hidden">
-                <button id="menu-btn" on:click={() => {isMobileMenu = !isMobileMenu}} class="shadow-orange-500/40 shadow backdrop-blur-sm md:hidden text-black dark:text-white dark:text-black bg-zinc-300/50 dark:bg-zinc-700/50 menu-border rounded-full text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Menu <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                <button id="menu-btn" on:click={() => {isMobileMenu = !isMobileMenu}} class="shadow-orange-500/40 shadow backdrop-blur-sm md:hidden text-black dark:text-white bg-zinc-300/50 dark:bg-zinc-700/50 menu-border rounded-full text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Menu <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
                 <!-- Dropdown menu -->
                 {#if isMobileMenu}                
                 <div class="w-full flex justify-end mt-2 z-50">
