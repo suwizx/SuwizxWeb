@@ -1,6 +1,7 @@
 <script>
-// @ts-nocheck
-
+    import axios from "axios";
+    import {onMount} from "svelte";
+    import api from "../config/api";
     import { Link } from "svelte-routing";
     import Icon from 'svelte-icons-pack/Icon.svelte';
     import BsSun from "svelte-icons-pack/bs/BsSun";
@@ -11,21 +12,33 @@
 
     let isMobileMenu = false;
     $: switchModeIcon = isDark ? BsSun : BsMoon ;
+
+    let userdata = ""
+
+    onMount(() => {
+        axios.get(api + "/sidebar/photoURL").then((res) => {
+            userdata = (res.data.vaule);
+        });
+    })
 </script>
 
 <header>
     <div class="flex items-center px-4 py-4 flex-warp fixed top-0 w-full">
         <nav class="flex justify-between w-full ">
-            <img class="md:flex hidden h-10 w-10 object-cover object-top rounded-full" src="./img/profile/spromsat-profile.jpg">
+            {#if userdata}
+                <img class="md:flex hidden h-10 w-10 object-cover object-top rounded-full" src={userdata} alt={`รูปโพรไฟล์`}>
+            {:else}
+                <div class="md:flex hidden h-10 w-10 object-cover object-top rounded-full"></div>
+            {/if}
             <ul class="md:flex hidden rounded-full text-black dark:text-white px-3 drop-shadow-md bg-zinc-300/50 dark:bg-zinc-700/50 menu-border shadow-orange-500/40 shadow backdrop-blur-sm">
-                <li><button class=" px-3 py-2  block hover:text-orange-500 orange-h">โพรไฟล์</button></li>
-                <li><button class=" px-3 py-2  block hover:text-orange-500 orange-h">ผลงาน</button></li>
-                <li><button class=" px-3 py-2  block hover:text-orange-500 orange-h">บทความ</button></li>
-                <li><button class=" px-3 py-2 block hover:text-orange-500 orange-h">ติดต่อ</button></li>
+                <li><Link to="/" class=" px-3 py-2  block hover:text-orange-500 orange-h">โพรไฟล์</Link></li>
+                <li><Link to="/works" class=" px-3 py-2  block hover:text-orange-500 orange-h">ผลงาน</Link></li>
+                <li><a href="https://blog.suwizx.dev" class=" px-3 py-2  block hover:text-orange-500 orange-h">บทความ</a></li>
+                <li><Link to="/contact" class=" px-3 py-2 block hover:text-orange-500 orange-h">ติดต่อ</Link></li>
             </ul>
             <button on:click={switchMode} class={!isDark ? 'h-fit flex items-center px-4 py-2 text-white bg-gradient-to-r rounded-full shadow-orange-500/40 shadow backdrop-blur  from-rose-500/90 to-orange-500/90' : 'h-fit flex items-center px-4 py-2 text-white bg-gradient-to-r rounded-full shadow-white/40 shadow backdrop-blur  from-zinc-700 to-zinc-900' }>
-                <span id="toggle-icon">
-                    <Icon class="w-5" src={switchModeIcon} />
+                <span>
+                    <Icon src={switchModeIcon} />
                 </span>
             </button>
 
@@ -38,16 +51,16 @@
                     <div id="menu-list" class="md:hidden z-10 w-44 bg-zinc-300/50 dark:bg-zinc-700/50 menu-border backdrop-blur-sm rounded divide-y divide-gray-100 shadow-orange-500/40 shadow">
                         <ul class="py-1 text-sm dark:text-white text-black">
                         <li>
-                            <button class="w-full text-start block py-2 px-4">โพรไฟล์</button>
+                            <Link to="/" class="w-full text-start block py-2 px-4">โพรไฟล์</Link>
                         </li>
                         <li>
-                            <button class="w-full text-start block py-2 px-4 ">ผลงาน</button>
+                            <Link to="/works" class="w-full text-start block py-2 px-4 ">ผลงาน</Link>
                         </li>
                         <li>
-                            <button class="w-full text-start block py-2 px-4 ">บทความ</button>
+                            <a href="https://blog.suwizx.dev" class="w-full text-start block py-2 px-4 ">บทความ</a>
                         </li>
                         <li>
-                            <button class="w-full text-start block py-2 px-4 ">ติดต่อ</button>
+                            <Link to="/contact" class="w-full text-start block py-2 px-4 ">ติดต่อ</Link>
                         </li>
                         </ul>
                     </div>

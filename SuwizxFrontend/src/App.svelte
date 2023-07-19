@@ -5,13 +5,15 @@
   import { onMount } from "svelte";
 
   import Home from "./pages/Home.svelte";
+  import NotFound from "./pages/NotFound.svelte";
+
   import Header from "./components/Header.svelte";
   import InfoCard from "./components/InfoCard.svelte";
 
-  let isDark = false;
+  let isDark;
 
   onMount(() => {
-    if (localStorage.getItem("DarkTheme") === null) {
+    if (localStorage.getItem("DarkTheme") === null || localStorage.getItem("DarkTheme") === "undefined") {
       localStorage.setItem(
         "DarkTheme",JSON.stringify(window.matchMedia("(prefers-color-scheme: dark)").matches)
       );
@@ -20,14 +22,15 @@
   });
 
   $: document.documentElement.setAttribute('data-mode', isDark ? 'dark' : 'light');
-  $: localStorage.setItem("DarkTheme", JSON.stringify(isDark));
 
   const switchMode = () => {
 	isDark = !isDark;
+  localStorage.setItem("DarkTheme", JSON.stringify(isDark));
   }
 
 </script>
 
+<Router>
 <main class="bg-zinc-100 dark:bg-zinc-900 font-LineSeed text-black dark:text-white min-h-screen transition">
   <Header switchMode={switchMode} isDark={isDark} />
   <div class="py-20 max-w-6xl mx-auto px-10 flex flex-wrap">
@@ -35,9 +38,11 @@
 		<InfoCard />
 	</div>
 	<div class="lg:w-9/12 md:w-7/12 w-full">
-		<Router>
-		  <Route path="/" component={Home} />
-		</Router>
-	</div>
+    <div class="md:ml-5">
+        <Route path="/" component={Home} />
+        <Route path="/*" component={NotFound} />
+      </div>
+    </div>
   </div>
 </main>
+</Router>

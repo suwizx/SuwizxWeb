@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@iconify/svelte": "^3.1.4",
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.25",
@@ -17,6 +18,7 @@
     "vite": "^4.4.0"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "svelte-icons-pack": "^2.1.0",
     "svelte-routing": "^1.11.0"
   }
