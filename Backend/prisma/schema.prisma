@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model socials {
+  id      Int    @id @default(autoincrement())
+  name    String
+  link    String
+  svgLogo String @db.VarChar(3000)
+}
+
+model myData {
+  id    Int    @id @default(autoincrement())
+  field String
+  vaule String
+}
+
+model educations {
+  id        Int    @id @default(autoincrement())
+  name      String
+  address   String
+  aboutLink String
+  photoURL  String
+}
+
+model skills {
+  id      Int    @id @default(autoincrement())
+  name    String
+  level   Int
+  svgFile String @db.VarChar(1500)
+}
+
+model projects {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  link        Json
+  photoURL    String
+}
+
+model activities {
+  id       Int    @id @default(autoincrement())
+  name     String
+  photoURL String
+}
+
+model certificates {
+  id       Int     @id @default(autoincrement())
+  photoURL String? @db.VarChar(1500)
+}

@@ -6,6 +6,7 @@
 
   import Home from "./pages/Home.svelte";
   import NotFound from "./pages/NotFound.svelte";
+  import Works from "./pages/Work.svelte";
 
   import Header from "./components/Header.svelte";
   import InfoCard from "./components/InfoCard.svelte";
@@ -41,6 +42,7 @@
     <div class="md:ml-5">
         <Route path="/" component={Home} />
         <Route path="/*" component={NotFound} />
+        <Route path="/works" component={Works} />
       </div>
     </div>
   </div>
